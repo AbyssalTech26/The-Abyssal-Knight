@@ -1,7 +1,4 @@
-using Newtonsoft.Json.Bson;
-using UnityEditor.Tilemaps;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class Enemy_Movement : MonoBehaviour
 {
@@ -12,7 +9,7 @@ public class Enemy_Movement : MonoBehaviour
     public LayerMask playerLayer;
 
     private float attackCooldownTimer;
-    //private bool isChasing;
+    private bool isChasing;
     private int facingDirection = -1;
     private EnemyState enemyState;
     public float attackRange = 2; // The range at which the enemy will attack the player
@@ -69,7 +66,7 @@ public class Enemy_Movement : MonoBehaviour
             player = hits[0].transform;
             //if the player is in attack range AND if cooldown is ready
             if (Vector2.Distance(transform.position, player.position) <= attackRange && attackCooldownTimer <= 0)
-        {
+            {
                 attackCooldownTimer = attackCooldown;
                 ChangeState(EnemyState.Attacking);
 
