@@ -9,6 +9,7 @@ public class Enemy_Movement : MonoBehaviour
     private bool isChasing;
     private int facingDirection = -1;
     private EnemyState enemyState;
+    public float attackRange = 2; // The range at which the enemy will attack the player
     private Rigidbody2D rb;
     private Transform player;
     private Animator anim;
@@ -23,15 +24,30 @@ public class Enemy_Movement : MonoBehaviour
     {
         if (enemyState == EnemyState.Chasing)
         {
-            if (player.position.x > transform.position.x && facingDirection == -1 ||
-                player.position.x < transform.position.x && facingDirection == 1)
-            { 
-                Flip();
-            }
-            Vector2 direction = (player.position - transform.position).normalized;
-            rb.linearVelocity = direction * speed;
+            Chase();
+        }
+        else if (enemyState ==EnemyState.Attacking)
+        { 
+            //Attack stuff here
         }
     }
+
+    void Chase()
+    {
+        if(Vector2.Distance (transform.position, player.transform.position) <= attackRange)
+        {
+            ChangeState(EnemyState.Attacking);
+            
+        }
+        else if (player.position.x > transform.position.x && facingDirection == -1 ||
+                    player.position.x < transform.position.x && facingDirection == 1)
+        {
+            Flip();
+        }
+        Vector2 direction = (player.position - transform.position).normalized;
+        rb.linearVelocity = direction * speed;
+    }
+
     void Flip()
     {
         facingDirection *= -1;
@@ -65,6 +81,8 @@ public class Enemy_Movement : MonoBehaviour
             anim.SetBool("isIdle", false);
         else if (enemyState == EnemyState.Chasing)
             anim.SetBool("isChasing", false);
+        else if (enemyState == EnemyState.Attacking)
+            anim.SetBool("isAttacking", false);
 
         //Update our current state
         enemyState = newState;
@@ -74,6 +92,8 @@ public class Enemy_Movement : MonoBehaviour
             anim.SetBool("isIdle", true);
         else if (enemyState == EnemyState.Chasing)
             anim.SetBool("isChasing", true);
+        else if (enemyState == EnemyState.Attacking)
+            anim.SetBool("isAttacking", true);
     }
 }
 //StateMachine =  Used for the enemy to switch between different states, such as idle and chasing the player.
@@ -81,4 +101,5 @@ public enum EnemyState
 {
     Idle, 
     Chasing,
+    Attacking,
 }
