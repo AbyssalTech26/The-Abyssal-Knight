@@ -1,5 +1,5 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -18,9 +18,9 @@ public class PlayerHealth : MonoBehaviour
         healthTextAnim.Play("TextUpdate");
         healthText.text = "HP: " + currentHealth + " / " + maxHealth;
 
-        if(currentHealth <= 0)
+        if (currentHealth <= 0)
         {
             gameObject.SetActive(false);
-       }
+        }
     }
 }

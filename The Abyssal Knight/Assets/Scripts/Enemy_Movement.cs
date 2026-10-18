@@ -6,7 +6,13 @@ using UnityEngine.XR;
 public class Enemy_Movement : MonoBehaviour
 {
     public float speed;
-    private bool isChasing;
+    public float attackCooldown = 2;
+    public float playerDetectRange = 5;
+    public Transform detectionPoint;
+    public LayerMask playerLayer;
+
+    private float attackCooldownTimer;
+    //private bool isChasing;
     private int facingDirection = -1;
     private EnemyState enemyState;
     public float attackRange = 2; // The range at which the enemy will attack the player
@@ -22,24 +28,25 @@ public class Enemy_Movement : MonoBehaviour
 
     void Update()
     {
+        CheckForPlayer();
+        if (attackCooldownTimer > 0)
+        {
+            attackCooldownTimer -= Time.deltaTime;
+        }
         if (enemyState == EnemyState.Chasing)
         {
             Chase();
         }
-        else if (enemyState ==EnemyState.Attacking)
-        { 
+        else if (enemyState == EnemyState.Attacking)
+        {
             //Attack stuff here
+            rb.linearVelocity = Vector2.zero; //Enemy stops before attacking
         }
     }
 
     void Chase()
     {
-        if(Vector2.Distance (transform.position, player.transform.position) <= attackRange)
-        {
-            ChangeState(EnemyState.Attacking);
-            
-        }
-        else if (player.position.x > transform.position.x && facingDirection == -1 ||
+        if (player.position.x > transform.position.x && facingDirection == -1 ||
                     player.position.x < transform.position.x && facingDirection == 1)
         {
             Flip();
@@ -51,28 +58,34 @@ public class Enemy_Movement : MonoBehaviour
     void Flip()
     {
         facingDirection *= -1;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z); 
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void CheckForPlayer()
     {
-        if (collision.gameObject.tag == "Player")
+        Collider2D[] hits = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectRange, playerLayer);
+        if (hits.Length > 0)
         {
-            if (player == null)
-            {
-                player = collision.transform;
-            }
-            ChangeState(EnemyState.Chasing);
-        }
-    }
+            player = hits[0].transform;
+            //if the player is in attack range AND if cooldown is ready
+            if (Vector2.Distance(transform.position, player.position) <= attackRange && attackCooldownTimer <= 0)
+        {
+                attackCooldownTimer = attackCooldown;
+                ChangeState(EnemyState.Attacking);
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.gameObject.tag == "Player")
-        {  
-        rb.linearVelocity = Vector2.zero;
-        ChangeState(EnemyState.Idle);
+            }
+            else if (Vector2.Distance(transform.position, player.position) > attackRange)
+            {
+                ChangeState(EnemyState.Chasing);
+            }
+            else
+            {
+                rb.linearVelocity = Vector2.zero;
+                ChangeState(EnemyState.Idle);
+            }
+
         }
+
     }
     void ChangeState(EnemyState newState)
     {
@@ -99,7 +112,7 @@ public class Enemy_Movement : MonoBehaviour
 //StateMachine =  Used for the enemy to switch between different states, such as idle and chasing the player.
 public enum EnemyState
 {
-    Idle, 
+    Idle,
     Chasing,
     Attacking,
 }
