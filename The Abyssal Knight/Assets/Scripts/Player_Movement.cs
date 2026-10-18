@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 
-public class Player_Movement : MonoBehaviour
+public sealed class Player_Movement : MonoBehaviour
 {
     public float speed = 5; //Speed of the player movement
     

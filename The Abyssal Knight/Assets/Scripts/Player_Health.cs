@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public sealed class PlayerHealth : MonoBehaviour
 {
     public int currentHealth;
     public int maxHealth;

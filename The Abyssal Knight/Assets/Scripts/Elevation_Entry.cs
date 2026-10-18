@@ -1,13 +1,13 @@
 using UnityEngine;
 
-public class Elevation_Entry : MonoBehaviour
+public sealed class Elevation_Entry : MonoBehaviour
 {
     public Collider2D[] mountainColliders;
     public Collider2D[] boundaryColliders;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-    if (collision.gameObject.tag == "Player")  
+        if (collision.gameObject.tag == "Player")
         {
             foreach (Collider2D mountain in mountainColliders)
             {

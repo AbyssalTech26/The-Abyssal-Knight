@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy_Combat : MonoBehaviour
+public sealed class Enemy_Combat : MonoBehaviour
 {
     public int damage = 2;
     public Transform attackPoint;

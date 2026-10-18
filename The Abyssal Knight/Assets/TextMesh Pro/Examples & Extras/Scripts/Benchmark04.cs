@@ -5,7 +5,7 @@ using System.Collections;
 namespace TMPro.Examples
 {
 
-    public class Benchmark04 : MonoBehaviour
+    public sealed class Benchmark04 : MonoBehaviour
     {
 
         public int SpawnType = 0;

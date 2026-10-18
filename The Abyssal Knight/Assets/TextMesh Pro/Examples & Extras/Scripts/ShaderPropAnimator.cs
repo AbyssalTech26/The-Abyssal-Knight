@@ -4,8 +4,8 @@ using System.Collections;
 
 namespace TMPro.Examples
 {
-    
-    public class ShaderPropAnimator : MonoBehaviour
+
+    public sealed class ShaderPropAnimator : MonoBehaviour
     {
 
         private Renderer m_Renderer;

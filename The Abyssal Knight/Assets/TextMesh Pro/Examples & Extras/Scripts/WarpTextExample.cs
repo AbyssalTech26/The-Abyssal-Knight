@@ -5,7 +5,7 @@ using System.Collections;
 namespace TMPro.Examples
 {
 
-    public class WarpTextExample : MonoBehaviour
+    public sealed class WarpTextExample : MonoBehaviour
     {
 
         private TMP_Text m_TextComponent;

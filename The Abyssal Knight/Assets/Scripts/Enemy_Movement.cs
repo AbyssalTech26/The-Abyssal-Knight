@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Enemy_Movement : MonoBehaviour
+public sealed class Enemy_Movement : MonoBehaviour
 {
     public float speed;
     public float attackCooldown = 2;

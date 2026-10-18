@@ -5,7 +5,7 @@ using System.Collections;
 namespace TMPro.Examples
 {
 
-    public class SkewTextExample : MonoBehaviour
+    public sealed class SkewTextExample : MonoBehaviour
     {
 
         private TMP_Text m_TextComponent;
