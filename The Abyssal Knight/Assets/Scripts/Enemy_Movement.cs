@@ -4,7 +4,7 @@ public sealed class Enemy_Movement : MonoBehaviour
 {
     public float speed;
     public float attackCooldown = 2;
-    public float playerDetectRange = 5;
+    public float playerDetectRange = 5; //The distance within which the enemy will see the player
     public Transform detectionPoint;
     public LayerMask playerLayer;
 
@@ -58,7 +58,7 @@ public sealed class Enemy_Movement : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 
-    private void CheckForPlayer()
+    private void CheckForPlayer() //Method which enemy detects the players presence. "Stay" will recognise the player is still in range
     {
         Collider2D[] hits = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectRange, playerLayer);
         if (hits.Length > 0)
