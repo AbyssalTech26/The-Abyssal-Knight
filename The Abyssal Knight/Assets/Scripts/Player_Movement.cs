@@ -11,7 +11,16 @@ public sealed class PlayerMovement : MonoBehaviour
     public Rigidbody2D rigidbody; //Reference to the Rigidbody2D component
     public Animator anim; //Reff to the Animator component
     private bool isKnockedBack;
+    public Player_Combat player_Combat;
 
+    private void Update() //Keep tansition from movemnt to attacking seperate from attacking (Abide by Single Class resonsibility). 
+                          //Update is the fastets way to get feedback 
+    {
+        if (Input.GetButtonDown("Slash")) //Chekc input, if so : Run attack method
+        {
+            player_Combat.Attack(); 
+        }
+    }
 
     //FixedUpdate is called 50x per frame
     void FixedUpdate() //Movement Logic
