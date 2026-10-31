@@ -687,6 +687,7 @@ MonoBehaviour:
   attackPoint: {fileID: 1773752114}
   weaponRange: 1
   knockbckForce: 5
+  stunTime: 0.2
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
