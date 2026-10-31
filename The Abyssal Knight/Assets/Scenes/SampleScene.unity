@@ -590,7 +590,7 @@ Transform:
   m_GameObject: {fileID: 365995236}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 18.4, y: 10.8, z: 0}
+  m_LocalPosition: {x: 17.48, y: 5.32, z: 0}
   m_LocalScale: {x: 2.8807144, y: 2.919126, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -686,6 +686,7 @@ MonoBehaviour:
   damage: 2
   attackPoint: {fileID: 1773752114}
   weaponRange: 1
+  knockbckForce: 5
   playerLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -14889,7 +14890,7 @@ Transform:
   m_GameObject: {fileID: 1773752113}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.279, y: -0.275, z: 0}
+  m_LocalPosition: {x: -0.273, y: -0.247, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
