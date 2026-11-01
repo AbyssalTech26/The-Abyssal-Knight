@@ -4,10 +4,13 @@ public class Player_Combat : MonoBehaviour
 {
     public Transform attackPoint;//Attack origin point
     public float weaponRange = 1;
+    public float knockbackForce = 50;
+    public float knockbackTime = .15f; // Duration of knockback 
+    public float stunTime = .3f; // Duration of the stun afterward
     public LayerMask enemyLayer;//what an enemy is
     public int damage = 1;
 
-    
+
     public Animator anim;
     public float cooldown = 2;
     private float timer;
@@ -22,8 +25,8 @@ public class Player_Combat : MonoBehaviour
 
     public void Attack()
     {
-        if(timer <= 0)
-        anim.SetBool("isAttacking", true); //When calling attack, animator set bool to true  
+        if (timer <= 0)
+            anim.SetBool("isAttacking", true); //When calling attack, animator set bool to true  
         timer = cooldown;
     }
 
@@ -34,7 +37,9 @@ public class Player_Combat : MonoBehaviour
 
         if (enemies.Length > 0)//if there is 1 enemy, deal damagew to enemy 0(first in the list of array)
         {
-            enemies[0].GetComponent<Enemy_Health>().ChnageHealth(-damage);//if Enemy_Health script is on a child of an Enemy use: "GetComponentInChildren<>()" instead
+            enemies[0].GetComponent<Enemy_Health>().ChangeHealth(-damage);//if Enemy_Health script is on a child of
+                                                                          //an Enemy use: "GetComponentInChildren<>()" instead
+            enemies[0].GetComponent<Enemy_Knockback>().Knockback(transform, knockbackForce, knockbackTime, stunTime);
         }
     }
 

@@ -1,12 +1,10 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public sealed class PlayerMovement : MonoBehaviour
 {
     public float speed = 5; //Speed of the player movement
-    
+
     public int facingDirection = 1; //1 for right, -1 for left
     public Rigidbody2D rigidbody; //Reference to the Rigidbody2D component
     public Animator anim; //Reff to the Animator component
@@ -18,7 +16,7 @@ public sealed class PlayerMovement : MonoBehaviour
     {
         if (Input.GetButtonDown("Slash")) //Chekc input, if so : Run attack method
         {
-            player_Combat.Attack(); 
+            player_Combat.Attack();
         }
     }
 

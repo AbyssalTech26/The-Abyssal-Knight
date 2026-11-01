@@ -1,19 +1,19 @@
 using UnityEngine;
 
 public class Enemy_Health : MonoBehaviour
-{ 
+{
 
     public int currentHealth;
-        public int maxHealth;
+    public int maxHealth;
 
     private void Start()
     {
-        currentHealth = maxHealth; 
+        currentHealth = maxHealth;
     }
 
-    public void ChnageHealth(int amount)
+    public void ChangeHealth(int amount)
     {
-        currentHealth += amount; 
+        currentHealth += amount;
 
         if (currentHealth > maxHealth)
         {

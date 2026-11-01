@@ -25,19 +25,22 @@ public sealed class Enemy_Movement : MonoBehaviour
 
     void Update()
     {
-        CheckForPlayer();
-        if (attackCooldownTimer > 0)
+        if (enemyState != EnemyState.Knockback) //If enemy state is not = Knocnack then all the othe code will run
         {
-            attackCooldownTimer -= Time.deltaTime;
-        }
-        if (enemyState == EnemyState.Chasing)
-        {
-            Chase();
-        }
-        else if (enemyState == EnemyState.Attacking)
-        {
-            //Attack stuff here
-            rb.linearVelocity = Vector2.zero; //Enemy stops before attacking
+            CheckForPlayer();
+            if (attackCooldownTimer > 0)
+            {
+                attackCooldownTimer -= Time.deltaTime;
+            }
+            if (enemyState == EnemyState.Chasing)
+            {
+                Chase();
+            }
+            else if (enemyState == EnemyState.Attacking)
+            {
+                //Attack stuff here
+                rb.linearVelocity = Vector2.zero; //Enemy stops before attacking
+            }
         }
     }
 
@@ -64,7 +67,7 @@ public sealed class Enemy_Movement : MonoBehaviour
         if (hit != null)
         {
             player = hit.transform;
-            
+
             //if the player is in attack range AND if cooldown is ready
             if (Vector2.Distance(transform.position, player.position) <= attackRange && attackCooldownTimer <= 0)
             {
@@ -85,7 +88,7 @@ public sealed class Enemy_Movement : MonoBehaviour
         }
 
     }
-    void ChangeState(EnemyState newState)
+    public void ChangeState(EnemyState newState)
     {
         //Exit the current animation state
         if (enemyState == EnemyState.Idle)
@@ -105,7 +108,7 @@ public sealed class Enemy_Movement : MonoBehaviour
             anim.SetBool("isChasing", true);
         else if (enemyState == EnemyState.Attacking)
             anim.SetBool("isAttacking", true);
-    }
+    } //Will later add in Knockback animation . Utilising 'else if (enemyState==EnemyState.KNockback anim.SetBool"(isKnockback",false/true)'
 }
 //StateMachine =  Used for the enemy to switch between different states, such as idle and chasing the player.
 public enum EnemyState
@@ -113,4 +116,5 @@ public enum EnemyState
     Idle,
     Chasing,
     Attacking,
+    Knockback,
 }
