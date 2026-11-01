@@ -60,10 +60,11 @@ public sealed class Enemy_Movement : MonoBehaviour
 
     private void CheckForPlayer() //Method which enemy detects the players presence. "Stay" will recognise the player is still in range
     {
-        Collider2D[] hits = Physics2D.OverlapCircleAll(detectionPoint.position, playerDetectRange, playerLayer);
-        if (hits.Length > 0)
+        Collider2D hit = Physics2D.OverlapCircle(detectionPoint.position, playerDetectRange, playerLayer);
+        if (hit != null)
         {
-            player = hits[0].transform;
+            player = hit.transform;
+            
             //if the player is in attack range AND if cooldown is ready
             if (Vector2.Distance(transform.position, player.position) <= attackRange && attackCooldownTimer <= 0)
             {
