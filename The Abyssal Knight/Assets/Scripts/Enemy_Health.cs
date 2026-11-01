@@ -13,7 +13,8 @@ public class Enemy_Health : MonoBehaviour
 
     public void ChnageHealth(int amount)
     {
-        currentHealth *= amount;
+        currentHealth += amount; 
+
         if (currentHealth > maxHealth)
         {
             currentHealth = maxHealth;
