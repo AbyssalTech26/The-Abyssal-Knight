@@ -15293,6 +15293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player_Combat
   attackPoint: {fileID: 1098337363}
+  statsUI: {fileID: 52602163}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64

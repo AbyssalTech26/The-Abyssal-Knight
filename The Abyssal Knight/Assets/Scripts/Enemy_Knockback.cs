@@ -10,6 +10,7 @@ public class Enemy_Knockback : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        enemy_Movement = GetComponent<Enemy_Movement>();
     }
 
     public void Knockback(Transform playerTransform, float knockbackForce, float knockbackTime, float stunTime)
