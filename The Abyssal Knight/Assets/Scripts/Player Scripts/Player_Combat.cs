@@ -3,6 +3,7 @@ using UnityEngine;
 public class Player_Combat : MonoBehaviour
 {
     public Transform attackPoint;//Attack origin point
+    public StatsUI statsUI;//Reference to the StatsUI script
     public LayerMask enemyLayer;//what an enemy is
 
 
@@ -27,6 +28,9 @@ public class Player_Combat : MonoBehaviour
 
     public void DealDamage()
     {
+        StatsManager.Instance.damage += 1;
+        statsUI.UpdateDamage();
+
         Collider2D[] enemies = Physics2D.OverlapCircleAll(attackPoint.position, StatsManager.Instance.weaponRange, enemyLayer); //Collides with enemy.
                                                                                                                                 //Cicle parameters would be: 1.Origin Ppint, 2.Cirlce Radius, 3.Layer to check for 
 

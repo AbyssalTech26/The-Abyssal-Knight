@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-public class StasUI : MonoBehaviour
+public class StatsUI : MonoBehaviour
 {
     public GameObject[] statsSlots;
     public CanvasGroup statsCanvas;
@@ -18,12 +18,14 @@ public class StasUI : MonoBehaviour
             if (statsOpen)
             {
                 Time.timeScale = 1;
+                UpdateAllStats();
                 statsCanvas.alpha = 0;
                 statsOpen = false;
             }
             else
             {
                 Time.timeScale = 0;
+                UpdateAllStats();
                 statsCanvas.alpha = 1;
                 statsOpen = true;
             }
