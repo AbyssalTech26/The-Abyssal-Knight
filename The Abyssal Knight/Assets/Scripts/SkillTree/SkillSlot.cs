@@ -1,9 +1,12 @@
+using System;
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class SkillSlot : MonoBehaviour
 {
+    public List<SkillSlot> prequisiteSkillSlots;
     public SkillSO skillSO;
     public int currentLevel;
     public bool isUnlocked;
@@ -11,26 +14,55 @@ public class SkillSlot : MonoBehaviour
     public Button skillButton;
     public TMP_Text skillLevelText;
 
+    public static event Action<SkillSlot> OnAbilityPointSpent;
+    public static event Action<SkillSlot> OnSkillMaxed;
+
     private void OnValidate()
     {
         if (skillSO != null && skillLevelText != null)
         {
-            UpdateUI();  
-        }
-    }
-
-    public void TryUpdateSkill()
-    {
-        if (isUnlocked && currentLevel < skillSO.maxLevel)
-        {
-            currentLevel++;
             UpdateUI();
         }
     }
 
+    public void TryUpgradeSkill()
+    {
+        if (isUnlocked && currentLevel < skillSO.maxLevel)
+        {
+            currentLevel++;
+            OnAbilityPointSpent?.Invoke(this);
+
+            if (currentLevel >= skillSO.maxLevel)
+            {
+                OnSkillMaxed?.Invoke(this);
+            }
+
+            UpdateUI();
+        }
+    }
+
+    public bool CanUnlockSkill() //returns a value
+    {
+        foreach (SkillSlot slot in prequisiteSkillSlots)
+        {
+            if (!slot.isUnlocked || slot.currentLevel < slot.skillSO.maxLevel)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void Unlock()
+    {
+        isUnlocked = true;
+        UpdateUI();
+    }
+
     private void UpdateUI()
-    { 
-    skillIcon.sprite = skillSO.skillIcon;
+    {
+        skillIcon.sprite = skillSO.skillIcon;
         if (isUnlocked)
         {
             skillButton.interactable = true;

@@ -214,6 +214,7 @@ MonoBehaviour:
   currentLevel: 0
   isUnlocked: 0
   skillIcon: {fileID: 8866455444286662385}
+  skillButton: {fileID: 3175863050882867905}
   skillLevelText: {fileID: 142152491481366188}
 --- !u!1 &1566212681003369385
 GameObject:
