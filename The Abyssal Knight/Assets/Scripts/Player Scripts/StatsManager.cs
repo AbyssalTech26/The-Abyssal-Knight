@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class StatsManager : MonoBehaviour
@@ -5,6 +6,7 @@ public class StatsManager : MonoBehaviour
     //Singleton Pattern: A coding patter that gives easy access to other scripts , and has only one "instance" of the script in the scene
     //static: varibales with only one instance. Unlike normal varibales (ie. enemy "health") that can have multiple instances for each enemy
     public static StatsManager Instance;
+    public TMP_Text healthText;
     
     [Header("Combat Stats")]
     public int damage;
