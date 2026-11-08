@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 344a33851f75f454ba793e5ce6a63869, type: 3}
   m_Name: maxHealthBoost
   m_EditorClassIdentifier: Assembly-CSharp::SkillManager
-  skillName: Max Health Boost
-  maxLevel: 5
-  skillIcon: {fileID: 21300000, guid: d33bdc08299f3244f98afe3942ccd84c, type: 3}
+  skillName: 
+  maxLevel: 0
+  skillIcon: {fileID: 0}

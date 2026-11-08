@@ -1,8 +1,6 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-
 
 public class ExpManager : MonoBehaviour
 {
@@ -12,8 +10,6 @@ public class ExpManager : MonoBehaviour
     public float expGrowthMultiplier = 1.2f; //The multiplier for how much exp is needed for the next level
     public Slider expSlider; //Reference to the UI slider that shows the player's exp
     public TMP_Text currentLevelText;
-
-    public static event Action<int> OnLevelUp; //Event that is triggered when the player levels up
 
     private void Start()
     {
@@ -51,7 +47,6 @@ public class ExpManager : MonoBehaviour
         level++;
         currentExp -= expToLevel;
         expToLevel = Mathf.RoundToInt(expToLevel * expGrowthMultiplier);
-        OnLevelUp?.Invoke(1);
     }
 
     public void UpdateUI()
